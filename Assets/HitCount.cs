@@ -19,7 +19,7 @@ void OnCollisionEnter(Collision col){
 		}
 	}
 void checkhit(){
-	if(hit == 3){
+	if(hit == 5){
 		Destroy(gameObject);
 			Instantiate(Car, transform.position, transform.rotation);
 	}
