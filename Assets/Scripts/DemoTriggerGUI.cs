@@ -191,11 +191,13 @@ public class DemoTriggerGUI : PunBehaviour
 
     private void CreatePlayerObject()
     {
-        Vector3 position = new Vector3( -2, 0, 0 );
-        position.x += Random.Range( -3f, 3f );
-        position.z += Random.Range( -4f, 4f );
+		Vector3 rot = transform.rotation.eulerAngles;
+		rot = new Vector3(rot.x,rot.y+180,rot.z);
 
-		GameObject newPlayerObject = PhotonNetwork.Instantiate( "Car", new Vector3(0,15,30), Quaternion.identity, 0 );
+		GameObject newPlayerObject = PhotonNetwork.Instantiate ("Car", new Vector3 (0, 0, 30), Quaternion.Euler(rot), 0);
+		if (PhotonNetwork.playerList.Length == 2) {
+			newPlayerObject = PhotonNetwork.Instantiate ("Car", new Vector3 (0, 0, -30), Quaternion.identity, 0);
+		}
         m_AnimatorView = newPlayerObject.GetComponent<PhotonAnimatorView>();
     }
 
