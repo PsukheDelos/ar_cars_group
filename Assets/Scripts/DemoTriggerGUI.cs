@@ -195,7 +195,7 @@ public class DemoTriggerGUI : PunBehaviour
         position.x += Random.Range( -3f, 3f );
         position.z += Random.Range( -4f, 4f );
 
-        GameObject newPlayerObject = PhotonNetwork.Instantiate( "Robot Kyle Mecanim", new Vector3(0,15,30), Quaternion.identity, 0 );
+		GameObject newPlayerObject = PhotonNetwork.Instantiate( "Car", new Vector3(0,15,30), Quaternion.identity, 0 );
         m_AnimatorView = newPlayerObject.GetComponent<PhotonAnimatorView>();
     }
 
