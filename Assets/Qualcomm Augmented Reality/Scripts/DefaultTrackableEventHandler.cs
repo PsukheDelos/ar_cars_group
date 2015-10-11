@@ -68,8 +68,7 @@ namespace Vuforia
 
         private void OnTrackingFound()
         {
-			Time.timescale = 1f; // this resumes it at normal speed.
-
+//			Time.timeScale = 1f; // this resumes it at normal speed.
             Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
             Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
 
@@ -80,10 +79,10 @@ namespace Vuforia
             }
 
             // Enable colliders:
-            foreach (Collider component in colliderComponents)
-            {
-                component.enabled = true;
-            }
+//            foreach (Collider component in colliderComponents)
+//            {
+//                component.enabled = true;
+//            }
 
 
 
@@ -93,9 +92,9 @@ namespace Vuforia
 
         private void OnTrackingLost()
         {
-			Time.timescale = 0f; // this pauses the time
+//			Time.timeScale = 0f; // this pauses the time
 
-            Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
+			Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
             Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
 
             // Disable rendering:
@@ -105,10 +104,10 @@ namespace Vuforia
             }
 
             // Disable colliders:
-            foreach (Collider component in colliderComponents)
-            {
-                component.enabled = false;
-            }
+//            foreach (Collider component in colliderComponents)
+//            {
+//                component.enabled = false;
+//            }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
         }
