@@ -194,11 +194,15 @@ public class DemoTriggerGUI : PunBehaviour
 		Vector3 rot = transform.rotation.eulerAngles;
 		rot = new Vector3(rot.x,rot.y+180,rot.z);
 
-		GameObject newPlayerObject = PhotonNetwork.Instantiate ("Car", new Vector3 (0, 0, 30), Quaternion.Euler(rot), 0);
+		GameObject newPlayerObject;
 		if (PhotonNetwork.playerList.Length == 2) {
 			newPlayerObject = PhotonNetwork.Instantiate ("Car", new Vector3 (0, 0, -30), Quaternion.identity, 0);
+		} else {
+			newPlayerObject = PhotonNetwork.Instantiate ("Car", new Vector3 (0, 0, 30), Quaternion.Euler(rot), 0);
 		}
-        m_AnimatorView = newPlayerObject.GetComponent<PhotonAnimatorView>();
+		if (newPlayerObject != null) {
+			m_AnimatorView = newPlayerObject.GetComponent<PhotonAnimatorView> ();
+		}
     }
 
     #endregion
