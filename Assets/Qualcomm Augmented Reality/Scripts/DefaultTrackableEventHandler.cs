@@ -68,6 +68,8 @@ namespace Vuforia
 
         private void OnTrackingFound()
         {
+			Time.timescale = 1f; // this resumes it at normal speed.
+
             Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
             Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
 
@@ -83,12 +85,16 @@ namespace Vuforia
                 component.enabled = true;
             }
 
+
+
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
         }
 
 
         private void OnTrackingLost()
         {
+			Time.timescale = 0f; // this pauses the time
+
             Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
             Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
 
