@@ -201,7 +201,7 @@ public class DemoTriggerGUI : PunBehaviour
 			newPlayerObject = PhotonNetwork.Instantiate ("Car", new Vector3 (0, 0, 30), Quaternion.Euler(rot), 0);
 		}
 		if (newPlayerObject != null) {
-			newPlayerObject.transform.parent = gameObject.transform;
+//			newPlayerObject.transform.parent = gameObject.transform;
 			m_AnimatorView = newPlayerObject.GetComponent<PhotonAnimatorView> ();
 		}
     }
