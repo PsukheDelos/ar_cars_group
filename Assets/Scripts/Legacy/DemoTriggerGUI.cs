@@ -196,9 +196,12 @@ public class DemoTriggerGUI : PunBehaviour
 
 		GameObject newPlayerObject;
 		if (PhotonNetwork.playerList.Length == 2) {
+			
 			newPlayerObject = PhotonNetwork.Instantiate ("Car", new Vector3 (0, 0, -30), Quaternion.identity, 0);
+			newPlayerObject.gameObject.name = PhotonNetwork.player.ID.ToString();
 		} else {
 			newPlayerObject = PhotonNetwork.Instantiate ("Car", new Vector3 (0, 0, 30), Quaternion.Euler(rot), 0);
+			newPlayerObject.gameObject.name = PhotonNetwork.player.ID.ToString();
 		}
 		if (newPlayerObject != null) {
 //			newPlayerObject.transform.parent = gameObject.transform;
