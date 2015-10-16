@@ -25,7 +25,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 	    private float cooldown;
 	
 		private int tommy_ammo = 10;
-		private int pistol_ammo = 12;
+//		private int pistol_ammo = 12;
 	
 	    public enum WeaponType
 	    {
