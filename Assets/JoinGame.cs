@@ -1,0 +1,120 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using System;
+using UnityEngine.EventSystems;
+
+namespace UnityStandardAssets.CrossPlatformInput{
+
+	public class JoinGame : Photon.MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
+
+		int roomNo = 0;
+		private float timer = 0.0f;
+
+		/// <summary>Connect automatically? If false you can set this to true later on or call ConnectUsingSettings in your own scripts.</summary>
+		public bool AutoConnect = true;
+		
+		public byte Version = 1;
+		
+		/// <summary>if we don't want to connect in Start(), we have to "remember" if we called ConnectUsingSettings()</summary>
+		private bool ConnectInUpdate = true;
+		private bool once = true;
+
+		public Dropdown lobbies;
+		// Use this for initialization
+		void Start () {
+			PhotonNetwork.autoJoinLobby = true;
+		}
+		
+		// Update is called once per frame
+		void Update () {
+			timer += Time.deltaTime;
+			if (timer >= 1.0f) {
+//				if(PhotonNetwork.insideLobby && once){
+////					Debug.Log("TEST: " + PhotonNetwork.GetRoomList().GetValue(0).ToString);
+//					once = false;
+//				}
+				Dropdown.OptionData od = new Dropdown.OptionData();
+				od.text = "[New Game]";
+				lobbies.options.Clear();
+				lobbies.options.Add(od);
+				foreach (RoomInfo i in PhotonNetwork.GetRoomList()) {
+					od = new Dropdown.OptionData();
+					od.text = i.name;
+					lobbies.options.Add(od);
+					Debug.Log ("RoomInfo: " + i.name);
+				}
+				Debug.Log("Room Count: " + PhotonNetwork.countOfRooms);
+				timer = 0;
+			}
+
+			if (ConnectInUpdate && AutoConnect && !PhotonNetwork.connected)
+			{
+				Debug.Log("Update() was called by Unity. Scene is loaded. Let's connect to the Photon Master Server. Calling: PhotonNetwork.ConnectUsingSettings();");
+				
+				ConnectInUpdate = false;
+				PhotonNetwork.ConnectUsingSettings(Version + "."+Application.loadedLevel);
+			}
+			//change the float value here to change how long it takes to switch.
+
+		}
+
+		
+		public void OnPointerDown(PointerEventData data)
+		{
+//			PhotonNetwork.CreateRoom("ar_room", new RoomOptions() { maxPlayers = 2 }, null);
+
+			if (lobbies.value == 0) {
+				bool createRoom =  PhotonNetwork.CreateRoom ("Booger", new RoomOptions() { maxPlayers = 2 }, null);
+				Debug.Log ("Create Room: " + createRoom.ToString());
+			} else {
+				PhotonNetwork.JoinRoom(lobbies.options[lobbies.value].text);
+				Debug.Log ("Join Room");
+			}
+//			Debug.Log ("Lobby Selection: " + lobbies.options[lobbies.value].text);
+
+//			lobbies.options.Clear;
+		}
+		
+		
+		public void OnPointerUp(PointerEventData data)
+		{
+
+		}
+
+		// to react to events "connected" and (expected) error "failed to join random room", we implement some methods. PhotonNetworkingMessage lists all available methods!
+		
+		public virtual void OnConnectedToMaster()
+		{
+			if (PhotonNetwork.networkingPeer.AvailableRegions != null) Debug.LogWarning("List of available regions counts " + PhotonNetwork.networkingPeer.AvailableRegions.Count + ". First: " + PhotonNetwork.networkingPeer.AvailableRegions[0] + " \t Current Region: " + PhotonNetwork.networkingPeer.CloudRegion);
+			Debug.Log("OnConnectedToMaster() was called by PUN. Now this client is connected and could join a room. Calling: PhotonNetwork.JoinRandomRoom();");
+//			PhotonNetwork.JoinOrCreateRoom("ar_room", new RoomOptions() { maxPlayers = 2 }, null);
+			//        PhotonNetwork.JoinRandomRoom();
+		}
+		
+		public virtual void OnPhotonRandomJoinFailed()
+		{
+			Debug.Log("OnPhotonRandomJoinFailed() was called by PUN. No random room available, so we create one. Calling: PhotonNetwork.CreateRoom(null, new RoomOptions() {maxPlayers = 4}, null);");
+			//        PhotonNetwork.CreateRoom(null, new RoomOptions() { maxPlayers = 4 }, null);
+//			PhotonNetwork.CreateRoom("ar_room", new RoomOptions() { maxPlayers = 2 }, null);
+			
+		}
+		
+		// the following methods are implemented to give you some context. re-implement them as needed.
+		
+		public virtual void OnFailedToConnectToPhoton(DisconnectCause cause)
+		{
+			Debug.LogError("Cause: " + cause);
+		}
+		
+		public void OnJoinedRoom()
+		{
+			Debug.Log("OnJoinedRoom() called by PUN. Now this client is in a room. From here on, your game would be running. For reference, all callbacks are listed in enum: PhotonNetworkingMessage");
+		}
+		
+		public void OnJoinedLobby()
+		{
+			Debug.Log("OnJoinedLobby(). Use a GUI to show existing rooms available in PhotonNetwork.GetRoomList().");
+		}
+	}
+}
