@@ -23,7 +23,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 			timer += Time.deltaTime;
 			if (timer >= 0.5f)//change the float value here to change how long it takes to switch.
 			{
-				if(_material.color==Color.white){
+				if(_material.color.Equals(Color.white)){
 					_material.color = Color.yellow;
 				}
 				else{
@@ -40,7 +40,10 @@ namespace UnityStandardAssets.CrossPlatformInput
 		
 		public void OnPointerUp(PointerEventData data)
 		{
-			Application.LoadLevel ("OnTriggerTester");
+//			GameObject.FindGameObjectWithTag ("TapCanvas").gameObject.GetComponent<Renderer> ().enabled = false;
+			GameObject.Find ("TapCanvas").gameObject.GetComponent<Canvas> ().enabled = false;
+			GameObject.Find ("JoinCanvas").gameObject.GetComponent<Canvas> ().enabled = true;
+
 		}
 	}
 }
