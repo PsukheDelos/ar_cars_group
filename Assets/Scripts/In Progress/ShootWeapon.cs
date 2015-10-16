@@ -44,8 +44,8 @@ namespace UnityStandardAssets.CrossPlatformInput
 				mybullet.GetComponent<Rigidbody> ().AddRelativeForce (0, 0, 1, ForceMode.Impulse);
 				Physics.IgnoreCollision (tommypoint.GetComponent<Collider>(), mybullet.GetComponentInChildren<Collider> ());
 				GameObject.Destroy (mybullet, bulletLife);
-				GetComponent<ObservedBehaviour> ().firedShot ();
-				tommy_ammo--;
+//				GetComponent<ObservedBehaviour> ().firedShot ();
+//				tommy_ammo--;
 			}
 		}
 
