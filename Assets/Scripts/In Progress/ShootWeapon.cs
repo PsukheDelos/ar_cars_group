@@ -39,9 +39,9 @@ namespace UnityStandardAssets.CrossPlatformInput
 			if (type == WeaponType.TOMMYGUN && cooldown > 0.1f && tommy_ammo > 0 && firing==true) {
 				cooldown = 0;
 //				tommypoint = GameObject.Find(PhotonNetwork.player.ID.ToString());
-				tommypoint = GameObject.Find("ColliderBody");
+				tommypoint = GameObject.Find("Weapon");
 				GameObject mybullet = GameObject.Instantiate (tommybullet, tommypoint.transform.position, tommypoint.transform.rotation) as GameObject;
-				mybullet.GetComponent<Rigidbody> ().AddRelativeForce (0, 0, 40, ForceMode.Impulse);
+				mybullet.GetComponent<Rigidbody> ().AddRelativeForce (0, 0, 1, ForceMode.Impulse);
 				Physics.IgnoreCollision (tommypoint.GetComponent<Collider>(), mybullet.GetComponentInChildren<Collider> ());
 				GameObject.Destroy (mybullet, bulletLife);
 				GetComponent<ObservedBehaviour> ().firedShot ();
