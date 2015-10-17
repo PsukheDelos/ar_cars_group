@@ -3,12 +3,13 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 namespace UnityStandardAssets.CrossPlatformInput{
 
 	public class JoinGame : Photon.MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
 
-		int roomNo = 0;
+//		int roomNo = 0;
 		private bool join = true;
 		private float timer = 0.0f;
 		public GUISkin Skin;
@@ -30,20 +31,22 @@ namespace UnityStandardAssets.CrossPlatformInput{
 		
 		// Update is called once per frame
 		void Update () {
-			timer += Time.deltaTime;
-			if (timer >= 1.0f) {
-				Dropdown.OptionData od = new Dropdown.OptionData();
-				od.text = "[New Game]";
-				lobbies.options.Clear();
-				lobbies.options.Add(od);
-				foreach (RoomInfo i in PhotonNetwork.GetRoomList()) {
-					od = new Dropdown.OptionData();
-					od.text = i.name;
-					lobbies.options.Add(od);
-					Debug.Log ("RoomInfo: " + i.name);
+			if (PhotonNetwork.connected) {
+				timer += Time.deltaTime;
+				if (timer >= 1.0f) {
+					Dropdown.OptionData od = new Dropdown.OptionData ();
+					od.text = "[New Game]";
+					lobbies.options.Clear ();
+					lobbies.options.Add (od);
+					foreach (RoomInfo i in PhotonNetwork.GetRoomList()) {
+						od = new Dropdown.OptionData ();
+						od.text = i.name;
+						lobbies.options.Add (od);
+						Debug.Log ("RoomInfo: " + i.name);
+					}
+					Debug.Log ("Room Count: " + PhotonNetwork.countOfRooms);
+					timer = 0;
 				}
-				Debug.Log("Room Count: " + PhotonNetwork.countOfRooms);
-				timer = 0;
 			}
 
 			if (ConnectInUpdate && AutoConnect && !PhotonNetwork.connected)
@@ -53,29 +56,36 @@ namespace UnityStandardAssets.CrossPlatformInput{
 				ConnectInUpdate = false;
 				PhotonNetwork.ConnectUsingSettings(Version + "."+Application.loadedLevel);
 			}
-			//change the float value here to change how long it takes to switch.
-
 		}
 
 		
 		public void OnPointerDown(PointerEventData data)
 		{
-//			PhotonNetwork.CreateRoom("ar_room", new RoomOptions() { maxPlayers = 2 }, null);
-			join = true;
-			PhotonNetwork.JoinOrCreateRoom ("ar_room", new RoomOptions () { maxPlayers = 2 }, null);
-//			PhotonNetwork.JoinRandomRoom ();
-//			if (lobbies.value == 0) {
-//				bool createRoom =  PhotonNetwork.CreateRoom ("ar_room", new RoomOptions() { maxPlayers = 2 }, null);
-//				Debug.Log ("Create Room: " + createRoom.ToString());
-//			} else {
-//				PhotonNetwork.JoinRoom(lobbies.options[lobbies.value].text);
-//				Debug.Log ("Join Room");
-//			}
+			if (PhotonNetwork.connected) {
+				join = true;
+				List<string> roomNames = new List<string> ();
+				roomNames.Add ("Bone Saw");
+				roomNames.Add ("Pain Train");
+				roomNames.Add ("Dead End");
+				roomNames.Add ("Occam's Razor");
+	
+				if (lobbies.value == 0) {
+					foreach (RoomInfo i in PhotonNetwork.GetRoomList()) {
+						roomNames.Remove (i.name);
+					}
+					String room = roomNames.ToArray ().GetValue (UnityEngine.Random.Range (0, roomNames.Count - 1)).ToString ();
+					join = PhotonNetwork.CreateRoom (room, new RoomOptions () { maxPlayers = 2 }, null);
+					Debug.Log ("Create Room: " + room);
+				} else {
+					join = PhotonNetwork.JoinRoom (lobbies.options [lobbies.value].text);
+					Debug.Log ("Join Room");
+				}
 
 //			if( PhotonNetwork.connectionStateDetailed == PeerState.Joined )
 //			{
 				GameObject.Find ("JoinCanvas").gameObject.GetComponent<Canvas> ().enabled = false;
 				GameObject.Find ("ButtonCanvas").gameObject.GetComponent<Canvas> ().enabled = true;
+			}
 //			}
 //			Debug.Log ("Lobby Selection: " + lobbies.options[lobbies.value].text);
 
