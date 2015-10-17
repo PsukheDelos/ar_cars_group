@@ -37,12 +37,8 @@ namespace UnityStandardAssets.CrossPlatformInput
 			if (type == WeaponType.TOMMYGUN && cooldown > 0.1f && tommy_ammo > 0 && firing==true) {
 				cooldown = 0;
 //				tommypoint = GameObject.Find(PhotonNetwork.player.ID.ToString());
-				tommypoint = GameObject.Find("Weapon");
-//				GameObject mybullet = PhotonView.Instantiate(tommybullet, tommypoint.transform.position, tommypoint.transform.rotation) as GameObject;
-				GameObject mybullet = GameObject.Instantiate (tommybullet, tommypoint.transform.position, tommypoint.transform.rotation) as GameObject;
-				mybullet.GetComponent<Rigidbody> ().AddRelativeForce (0, 0, 1, ForceMode.Impulse);
-				Physics.IgnoreCollision (tommypoint.GetComponent<Collider>(), mybullet.GetComponentInChildren<Collider> ());
-				GameObject.Destroy (mybullet, bulletLife);
+				fire ();
+//				PhotonView.Get(this).RPC("fire", PhotonTargets.All, null);				
 //				GetComponent<ObservedBehaviour> ().firedShot ();
 //				tommy_ammo--;
 			}
@@ -52,7 +48,15 @@ namespace UnityStandardAssets.CrossPlatformInput
 		{
 
 		}
-		
+
+//		[PunRPC]
+		void fire(){
+			tommypoint = GameObject.Find("Weapon");
+			GameObject mybullet = GameObject.Instantiate (tommybullet, tommypoint.transform.position, tommypoint.transform.rotation) as GameObject;
+			mybullet.GetComponent<Rigidbody> ().AddRelativeForce (0, 0, 0.1f, ForceMode.Impulse);
+			Physics.IgnoreCollision (tommypoint.GetComponent<Collider>(), mybullet.GetComponentInChildren<Collider> ());
+			GameObject.Destroy (mybullet, bulletLife);
+		}
 
 		
 		void OnDisable()
