@@ -8,7 +8,6 @@ namespace UnityStandardAssets.CrossPlatformInput
 {
 	public class ShootWeapon : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 	{
-
 	    public GameObject tommybullet;
 		public GameObject tommypoint;
 	    public GameObject pistolbullet;
@@ -33,11 +32,16 @@ namespace UnityStandardAssets.CrossPlatformInput
 
 		public void FixedUpdate () {
 			cooldown += Time.deltaTime;
+			Debug.Log ("Shooting Weapon");
 			//			tommypoint = GameObject.Find("Car");
 			if (type == WeaponType.TOMMYGUN && cooldown > 0.1f && tommy_ammo > 0 && firing==true) {
 				cooldown = 0;
+				GameObject.Find(PhotonNetwork.playerName).GetPhotonView().RPC("fireMachineGun", PhotonTargets.All);
+//				this.myPhotonView.RPC("fireMachineGun", PhotonTargets.All);
+
 //				tommypoint = GameObject.Find(PhotonNetwork.player.ID.ToString());
-				fire ();
+
+//				fire ();
 //				PhotonView.Get(this).RPC("fire", PhotonTargets.All, null);				
 //				GetComponent<ObservedBehaviour> ().firedShot ();
 //				tommy_ammo--;
@@ -51,6 +55,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 
 //		[PunRPC]
 		void fire(){
+
 			tommypoint = GameObject.Find("Weapon");
 			GameObject mybullet = GameObject.Instantiate (tommybullet, tommypoint.transform.position, tommypoint.transform.rotation) as GameObject;
 			mybullet.GetComponent<Rigidbody> ().AddRelativeForce (0, 0, 0.1f, ForceMode.Impulse);

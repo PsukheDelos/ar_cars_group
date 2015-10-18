@@ -7,7 +7,8 @@ public class DemoTriggerGUI : PunBehaviour
     #region Properties
 
     public GUISkin Skin;
-    
+	private PhotonView myPhotonView;
+
     #endregion
 
 
@@ -198,14 +199,17 @@ public class DemoTriggerGUI : PunBehaviour
 		if (PhotonNetwork.playerList.Length == 2) {
 			
 			newPlayerObject = PhotonNetwork.Instantiate ("Car2", new Vector3 (0, .6f, -30), Quaternion.identity, 0);
-			newPlayerObject.gameObject.name = PhotonNetwork.player.ID.ToString();
+			PhotonNetwork.playerName = PhotonNetwork.playerList.Length.ToString();
+			newPlayerObject.gameObject.name = PhotonNetwork.playerName;
 		} else {
 			newPlayerObject = PhotonNetwork.Instantiate ("Car2", new Vector3 (0, .6f, 30), Quaternion.Euler(rot), 0);
-			newPlayerObject.gameObject.name = PhotonNetwork.player.ID.ToString();
+			PhotonNetwork.playerName = PhotonNetwork.playerList.Length.ToString();
+			newPlayerObject.gameObject.name = PhotonNetwork.playerName;
 		}
 		if (newPlayerObject != null) {
 //			newPlayerObject.transform.parent = gameObject.transform;
 			m_AnimatorView = newPlayerObject.GetComponent<PhotonAnimatorView> ();
+//			myPhotonView = newPlayerObject.GetComponent<PhotonView>();
 		}
     }
 
