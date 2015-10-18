@@ -4,7 +4,7 @@ using System.Collections;
 
 
 public class HitCount : MonoBehaviour{
-	public Transform Car;
+	public Transform Bomb;
 
 
 	int hit = 0;
@@ -12,16 +12,21 @@ public class HitCount : MonoBehaviour{
 
 
 void OnCollisionEnter(Collision col){
-		if (col.gameObject.name == "Car(Clone)") {
+		if (col.gameObject.name == "Cube") {
 			Debug.Log ("Hit");
 			hit += 1;
 			checkhit ();
+		}
+		if (col.gameObject.name == "Rocket") {
+				Debug.Log ("Hit");
+				hit = 3;
+				checkhit ();
 		}
 	}
 void checkhit(){
 	if(hit == 3){
 		Destroy(gameObject);
-			Instantiate(Car, transform.position, transform.rotation);
+			Instantiate(Bomb, transform.position, transform.rotation);
 	}
   }
 }
