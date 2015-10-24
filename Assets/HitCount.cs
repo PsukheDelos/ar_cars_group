@@ -17,9 +17,9 @@ void OnCollisionEnter(Collision col){
 			hit += 1;
 			checkhit ();
 		}
-		if (col.gameObject.name == "Rocket") {
-				Debug.Log ("Hit");
-				hit = 3;
+		if (col.gameObject.name == "Grill Weapon Prefab X") {
+				Debug.Log ("HitX");
+				hit += 1;
 				checkhit ();
 		}
 	}
