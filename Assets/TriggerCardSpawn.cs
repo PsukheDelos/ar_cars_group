@@ -8,7 +8,7 @@ public class TriggerCardSpawn : MonoBehaviour {
 	
 	
 	void OnTriggerEnter(Collider col){
-		if (col.gameObject.name == "ImageTarget2XY") {
+		if (col.gameObject.name == "ArenaCollider") {
 			Debug.Log ("Hit");
 			Instantiate(SpawnArea, new Vector3(0,15,30), transform.rotation);
 		}

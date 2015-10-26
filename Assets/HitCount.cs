@@ -17,14 +17,14 @@ void OnCollisionEnter(Collision col){
 			hit += 1;
 			checkhit ();
 		}
-		if (col.gameObject.name == "Grill Weapon Prefab X") {
+		if (col.gameObject.name == "ColliderRam") {
 				Debug.Log ("HitX");
 				hit += 1;
 				checkhit ();
 		}
 	}
 void checkhit(){
-	if(hit == 3){
+	if(hit == 5){
 		Destroy(gameObject);
 			Instantiate(Bomb, transform.position, transform.rotation);
 	}
