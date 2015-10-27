@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="School_Bus_Card" size="500.000000 285.714294" />
+    <ImageTarget name="Taxi_Card" size="500.000000 285.714294" />
+    <ImageTarget name="Wrecking_Card" size="500.000000 285.714294" />
+    <ImageTarget name="V8_Card" size="500.000000 285.714294" />
+    <ImageTarget name="Skull_Card" size="500.000000 285.714294" />
+    <ImageTarget name="Board-Cover-A3" size="500.000000 354.838715" />
+  </Tracking>
+</QCARConfig>
