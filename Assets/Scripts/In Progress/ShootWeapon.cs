@@ -15,6 +15,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 
 		public Text timerText;
 		public Text countDownText;
+		public float gameDuration = 13.0f;// added 3 for the 3s count down
 
 		private float bulletLife = 10;
 
@@ -31,7 +32,6 @@ namespace UnityStandardAssets.CrossPlatformInput
 	
 		private float startTime;
 		private float currentTime;
-		private float gameDuration = 13.0f;// added 3 for the 3s count down
 
 		public enum WeaponType
 	    {
