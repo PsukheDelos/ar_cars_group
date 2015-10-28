@@ -4,7 +4,7 @@ public class WeaponController : MonoBehaviour {
 //
 	public GameObject bullet;
 	public Transform point;
-	private float bulletLife = 10;
+	private float bulletLife = 3;
 
 	[PunRPC]
 	void fireMachineGun()
