@@ -24,6 +24,7 @@ namespace UnityStandardAssets.CrossPlatformInput{
 		private bool ConnectInUpdate = true;
 
 		public Dropdown lobbies;
+		public Dropdown levels;
 		// Use this for initialization
 		void Start () {
 			PhotonNetwork.autoJoinLobby = true;
@@ -35,7 +36,7 @@ namespace UnityStandardAssets.CrossPlatformInput{
 				timer += Time.deltaTime;
 				if (timer >= 1.0f) {
 					Dropdown.OptionData od = new Dropdown.OptionData ();
-					od.text = "[New Game]";
+					od.text = "[NEW GAME]";
 					lobbies.options.Clear ();
 					lobbies.options.Add (od);
 					foreach (RoomInfo i in PhotonNetwork.GetRoomList()) {
@@ -64,10 +65,10 @@ namespace UnityStandardAssets.CrossPlatformInput{
 			if (PhotonNetwork.connected) {
 				join = true;
 				List<string> roomNames = new List<string> ();
-				roomNames.Add ("Bone Saw");
-				roomNames.Add ("Pain Train");
-				roomNames.Add ("Dead End");
-				roomNames.Add ("Occam's Razor");
+				roomNames.Add ("BONE SAW");
+				roomNames.Add ("PAIN TRAIN");
+				roomNames.Add ("DEAD END");
+				roomNames.Add ("OCCAM'S RAZOR");
 	
 				if (lobbies.value == 0) {
 					foreach (RoomInfo i in PhotonNetwork.GetRoomList()) {
@@ -81,15 +82,9 @@ namespace UnityStandardAssets.CrossPlatformInput{
 					Debug.Log ("Join Room");
 				}
 
-//			if( PhotonNetwork.connectionStateDetailed == PeerState.Joined )
-//			{
 				GameObject.Find ("JoinCanvas").gameObject.GetComponent<Canvas> ().enabled = false;
 				GameObject.Find ("ButtonCanvas").gameObject.GetComponent<Canvas> ().enabled = true;
 			}
-//			}
-//			Debug.Log ("Lobby Selection: " + lobbies.options[lobbies.value].text);
-
-//			lobbies.options.Clear;
 		}
 		
 		
@@ -125,7 +120,6 @@ namespace UnityStandardAssets.CrossPlatformInput{
 		
 		public void OnJoinedRoom()
 		{
-			Debug.Log ("HEYHEYHYE");
 			Debug.Log("OnJoinedRoom() called by PUN. Now this client is in a room. From here on, your game would be running. For reference, all callbacks are listed in enum: PhotonNetworkingMessage");
 		}
 		

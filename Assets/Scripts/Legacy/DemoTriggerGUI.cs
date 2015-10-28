@@ -196,20 +196,12 @@ public class DemoTriggerGUI : PunBehaviour
 		rot = new Vector3(rot.x,rot.y+180,rot.z);
 
 		GameObject newPlayerObject;
-		if (PhotonNetwork.playerList.Length == 2) {
-			
-			newPlayerObject = PhotonNetwork.Instantiate ("Car2", new Vector3 (0, .6f, -30), Quaternion.identity, 0);
-			PhotonNetwork.playerName = PhotonNetwork.playerList.Length.ToString();
-			newPlayerObject.gameObject.name = PhotonNetwork.playerName;
-		} else {
-			newPlayerObject = PhotonNetwork.Instantiate ("Car2", new Vector3 (0, .6f, 30), Quaternion.Euler(rot), 0);
-			PhotonNetwork.playerName = PhotonNetwork.playerList.Length.ToString();
-			newPlayerObject.gameObject.name = PhotonNetwork.playerName;
-		}
+		PhotonNetwork.playerName = "2";
+		GameObject spawnPoint = GameObject.Find ("Player" + PhotonNetwork.playerName + "SpawnPoint");
+		newPlayerObject = PhotonNetwork.Instantiate ("Car2", spawnPoint.transform.position, spawnPoint.transform.rotation, 0);
 		if (newPlayerObject != null) {
-//			newPlayerObject.transform.parent = gameObject.transform;
+			newPlayerObject.gameObject.name = PhotonNetwork.playerName;
 			m_AnimatorView = newPlayerObject.GetComponent<PhotonAnimatorView> ();
-//			myPhotonView = newPlayerObject.GetComponent<PhotonView>();
 		}
     }
 
