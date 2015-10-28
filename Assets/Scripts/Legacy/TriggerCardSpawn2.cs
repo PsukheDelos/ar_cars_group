@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TriggerCardSpawn : MonoBehaviour {
+public class TriggerCardSpawn2 : MonoBehaviour {
 
 	public Transform SpawnArea;
 	

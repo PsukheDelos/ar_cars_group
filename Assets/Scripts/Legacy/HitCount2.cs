@@ -3,7 +3,7 @@ using System.Collections;
 
 
 
-public class HitCount : MonoBehaviour{
+public class HitCount2 : MonoBehaviour{
 	public Transform Car;
 
 
