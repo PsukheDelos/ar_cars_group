@@ -10,29 +10,14 @@ namespace UnityStandardAssets.CrossPlatformInput
 
 	public class TapToStart : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 	{
-
-		private Text _material ;
-		private float timer = 0.0f;
-
 		void OnEnable () {
-			_material = GetComponent<Text> ();
-			_material.color = Color.white;
+
 		}
 
 		public void Update(){
-			timer += Time.deltaTime;
-			if (timer >= 0.5f)//change the float value here to change how long it takes to switch.
-			{
-				if(_material.color.Equals(Color.white)){
-					_material.color = Color.yellow;
-				}
-				else{
-					_material.color = Color.white;
-				}
-				timer = 0;
-			}
+
 		}
-		
+	
 		public void OnPointerDown(PointerEventData data)
 		{
 		}
@@ -40,10 +25,8 @@ namespace UnityStandardAssets.CrossPlatformInput
 		
 		public void OnPointerUp(PointerEventData data)
 		{
-//			GameObject.FindGameObjectWithTag ("TapCanvas").gameObject.GetComponent<Renderer> ().enabled = false;
 			GameObject.Find ("TapCanvas").gameObject.GetComponent<Canvas> ().enabled = false;
 			GameObject.Find ("JoinCanvas").gameObject.GetComponent<Canvas> ().enabled = true;
-
 		}
 	}
 }

@@ -32,6 +32,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 
 		public void FixedUpdate () {
 			cooldown += Time.deltaTime;
+
 			Debug.Log ("Shooting Weapon");
 			//			tommypoint = GameObject.Find("Car");
 			if (type == WeaponType.TOMMYGUN && cooldown > 0.1f && tommy_ammo > 0 && firing==true) {

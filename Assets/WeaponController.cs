@@ -13,7 +13,7 @@ public class WeaponController : MonoBehaviour {
 //		point = GameObject.Find ("Weapon").GetComponent<Weapon> ();;
 		GameObject mybullet = GameObject.Instantiate (bullet, point.position, point.rotation) as GameObject;
 		mybullet.GetComponent<Rigidbody> ().AddRelativeForce (0, 0, 1f, ForceMode.Impulse);
-		Physics.IgnoreCollision (point.GetComponent<Collider>(), mybullet.GetComponentInChildren<Collider> ());
+//		Physics.IgnoreCollision (point.GetComponent<Collider>(), mybullet.GetComponentInChildren<Collider> ());
 		GameObject.Destroy (mybullet, bulletLife);
 	}
 //	// Use this for initialization

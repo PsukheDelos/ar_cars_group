@@ -12,16 +12,20 @@ public class HitCount2 : MonoBehaviour{
 
 
 void OnCollisionEnter(Collision col){
-		if (col.gameObject.name == "Car(Clone)") {
-			Debug.Log ("Hit");
+		if (col.gameObject.name.Contains ("Bullet")) {
+			Debug.Log ("Bullet Hit");
 			hit += 1;
-			checkhit ();
+		} else if (col.gameObject.tag=="Player"){
+			Debug.Log ("Vehicle Hit");
+			hit += 5;
 		}
+		checkhit ();
 	}
 void checkhit(){
-	if(hit == 3){
+	if(hit == 5){
 		Destroy(gameObject);
-			Instantiate(Car, transform.position, transform.rotation);
+//		PhotonNetwork.Instantiate (Car, transform.position, transform.rotation, 0);
+		Instantiate(Car, transform.position, transform.rotation);
 	}
   }
 }

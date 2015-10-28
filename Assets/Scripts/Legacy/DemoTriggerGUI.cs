@@ -193,12 +193,30 @@ public class DemoTriggerGUI : PunBehaviour
     private void CreatePlayerObject()
     {
 		Vector3 rot = transform.rotation.eulerAngles;
-		rot = new Vector3(rot.x,rot.y+180,rot.z);
+		rot = new Vector3 (rot.x, rot.y + 180, rot.z);
 
+//		if (PhotonNetwork.room.playerCount == 2) {
+			PhotonNetwork.player.SetTeam(PhotonNetwork.masterClient.GetTeam());
+//		}
+
+		if (PhotonNetwork.player.GetTeam () != PunTeams.Team.blue) {
+			GameObject.Find ("Ice Environment").SetActive(false);
+		}
+		if (PhotonNetwork.player.GetTeam () != PunTeams.Team.red) {
+			GameObject.Find ("Rocks Arena").SetActive(false);
+		}
+		if (PhotonNetwork.player.GetTeam () != PunTeams.Team.none) {
+			GameObject.Find ("Cloud Battle Ring").SetActive(false);
+		}
+//		while (PhotonNetwork.room.customProperties.ToString()=="") {
+//		
+		Debug.Log ("Custom Prop" + PhotonNetwork.player.GetTeam().ToString());
+//		PhotonNetwork.player.c
 		GameObject newPlayerObject;
-		PhotonNetwork.playerName = "2";
+		PhotonNetwork.playerName = PhotonNetwork.playerList.Length.ToString ();
+		//		PhotonNetwork.playerName = "2"; //for testing player 2 spawn start location
 		GameObject spawnPoint = GameObject.Find ("Player" + PhotonNetwork.playerName + "SpawnPoint");
-		newPlayerObject = PhotonNetwork.Instantiate ("Car2", spawnPoint.transform.position, spawnPoint.transform.rotation, 0);
+		newPlayerObject = PhotonNetwork.Instantiate ("Taxi2", spawnPoint.transform.position, spawnPoint.transform.rotation, 0);
 		if (newPlayerObject != null) {
 			newPlayerObject.gameObject.name = PhotonNetwork.playerName;
 			m_AnimatorView = newPlayerObject.GetComponent<PhotonAnimatorView> ();

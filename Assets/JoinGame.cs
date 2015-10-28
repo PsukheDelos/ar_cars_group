@@ -76,11 +76,23 @@ namespace UnityStandardAssets.CrossPlatformInput{
 					}
 					String room = roomNames.ToArray ().GetValue (UnityEngine.Random.Range (0, roomNames.Count - 1)).ToString ();
 					join = PhotonNetwork.CreateRoom (room, new RoomOptions () { maxPlayers = 2 }, null);
+					if (levels.value == 0) {
+						PhotonNetwork.player.SetTeam (PunTeams.Team.red);
+					} else if (levels.value == 1) {
+						PhotonNetwork.player.SetTeam (PunTeams.Team.blue);
+					} else {
+						PhotonNetwork.player.SetTeam (PunTeams.Team.none);
+					}
+//					Debug.Log ("Level: " + levels.options [levels.value].text.ToString());
 					Debug.Log ("Create Room: " + room);
 				} else {
 					join = PhotonNetwork.JoinRoom (lobbies.options [lobbies.value].text);
+//					PhotonNetwork.otherPlayers
+//					PhotonNetwork.player.SetTeam(PhotonNetwork.otherPlayers[0].GetTeam());
 					Debug.Log ("Join Room");
 				}
+
+
 
 				GameObject.Find ("JoinCanvas").gameObject.GetComponent<Canvas> ().enabled = false;
 				GameObject.Find ("ButtonCanvas").gameObject.GetComponent<Canvas> ().enabled = true;
@@ -117,9 +129,21 @@ namespace UnityStandardAssets.CrossPlatformInput{
 		{
 			Debug.LogError("Cause: " + cause);
 		}
-		
+
 		public void OnJoinedRoom()
 		{
+//			GameObject.Find("Arena").GetComponent<Scrip
+//			if (PhotonNetwork.isMasterClient) {
+//			PhotonNetwork.player.
+
+//			PhotonNetwork.player.SetTeam(PhotonNetwork.otherPlayers[0].GetTeam());
+
+//			PhotonNetwork.set
+//				ExitGames.Client.Photon.Hashtable hm = new ExitGames.Client.Photon.Hashtable ();
+//				hm.Add ("level", levels.options [levels.value].text.ToString());
+//				PhotonNetwork.SetPlayerCustomProperties (hm);
+////				GameObject.FindGameObjectsWithTag("Arena");
+//			}
 			Debug.Log("OnJoinedRoom() called by PUN. Now this client is in a room. From here on, your game would be running. For reference, all callbacks are listed in enum: PhotonNetworkingMessage");
 		}
 		
