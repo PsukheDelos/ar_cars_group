@@ -216,7 +216,7 @@ public class DemoTriggerGUI : PunBehaviour
 		PhotonNetwork.playerName = PhotonNetwork.playerList.Length.ToString ();
 		//		PhotonNetwork.playerName = "2"; //for testing player 2 spawn start location
 		GameObject spawnPoint = GameObject.Find ("Player" + PhotonNetwork.playerName + "SpawnPoint");
-		newPlayerObject = PhotonNetwork.Instantiate ("Taxi2", spawnPoint.transform.position, spawnPoint.transform.rotation, 0);
+		newPlayerObject = PhotonNetwork.Instantiate ("CarSkull", spawnPoint.transform.position, spawnPoint.transform.rotation, 0);
 		if (newPlayerObject != null) {
 			newPlayerObject.gameObject.name = PhotonNetwork.playerName;
 			m_AnimatorView = newPlayerObject.GetComponent<PhotonAnimatorView> ();

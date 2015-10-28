@@ -56,7 +56,6 @@ namespace UnityStandardAssets.CrossPlatformInput
 
 //		[PunRPC]
 		void fire(){
-
 			tommypoint = GameObject.Find("Weapon");
 			GameObject mybullet = GameObject.Instantiate (tommybullet, tommypoint.transform.position, tommypoint.transform.rotation) as GameObject;
 			mybullet.GetComponent<Rigidbody> ().AddRelativeForce (0, 0, 0.1f, ForceMode.Impulse);
