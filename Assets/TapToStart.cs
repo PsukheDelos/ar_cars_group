@@ -23,11 +23,13 @@ namespace UnityStandardAssets.CrossPlatformInput
 			timer += Time.deltaTime;
 			if (timer >= 0.5f)//change the float value here to change how long it takes to switch.
 			{
-				if(_material.color.Equals(Color.white)){
+				if(_material!=null && _material.color.Equals(Color.white)){
 					_material.color = Color.yellow;
 				}
-				else{
+				else if (_material!=null){
 					_material.color = Color.white;
+				} else {
+					_material = GetComponent<Text> ();
 				}
 				timer = 0;
 			}

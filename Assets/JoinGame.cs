@@ -23,12 +23,37 @@ namespace UnityStandardAssets.CrossPlatformInput{
 		/// <summary>if we don't want to connect in Start(), we have to "remember" if we called ConnectUsingSettings()</summary>
 		private bool ConnectInUpdate = true;
 
+		private bool first = true;
+
 		public Dropdown lobbies;
+
+		private float startTime;
+		private float currentTime;
 		// Use this for initialization
 		void Start () {
 			PhotonNetwork.autoJoinLobby = true;
 		}
+
+		void start()
+		{
+			startTime = Time.time;
+			currentTime = startTime;
+			Debug.Log (startTime);
+		}
 		
+		void update()
+		{
+			currentTime = Time.time;
+			Debug.Log (currentTime-startTime);
+		}
+		
+		bool ended()
+		{
+			Debug.Log (currentTime-startTime);
+			return currentTime > (startTime + 120000000);
+		}
+		
+
 		// Update is called once per frame
 		void Update () {
 			if (PhotonNetwork.connected) {
@@ -36,6 +61,7 @@ namespace UnityStandardAssets.CrossPlatformInput{
 				if (timer >= 1.0f) {
 					Dropdown.OptionData od = new Dropdown.OptionData ();
 					od.text = "[New Game]";
+
 					lobbies.options.Clear ();
 					lobbies.options.Add (od);
 					foreach (RoomInfo i in PhotonNetwork.GetRoomList()) {
