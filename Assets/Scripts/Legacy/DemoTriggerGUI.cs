@@ -16,8 +16,7 @@ public class DemoTriggerGUI : PunBehaviour
 	private PhotonView myPhotonView;
 
     #endregion
-
-
+	
     #region Members
     
     private PhotonAnimatorView m_AnimatorView;  // local animatorView. set when we create our character in CreatePlayerObject()
@@ -232,11 +231,20 @@ public class DemoTriggerGUI : PunBehaviour
 		car = carNames.ToArray ().GetValue (UnityEngine.Random.Range (0, carNames.Count - 1)).ToString ();
 
 		GameObject spawnPoint = GameObject.Find ("Player" + PhotonNetwork.playerName + "SpawnPoint");
+
 		if (PhotonNetwork.playerName == "1") {
-			newPlayerObject = PhotonNetwork.Instantiate (car, spawnPoint.transform.position, spawnPoint.transform.rotation, 0);
+			GameObject.Destroy(GameObject.Find ("HealthSlider2"));
+//			GameObject.Find ("HealthSlider2").SetActive (false);
 		} else {
-			newPlayerObject = PhotonNetwork.Instantiate (car, spawnPoint.transform.position, spawnPoint.transform.rotation, 0);
+//			GameObject.Find ("HealthSlider1").SetActive (false);
+			GameObject.Destroy(GameObject.Find ("HealthSlider1"));
 		}
+
+//		if (PhotonNetwork.playerName == "1") {
+//			newPlayerObject = PhotonNetwork.Instantiate (car, spawnPoint.transform.position, spawnPoint.transform.rotation, 0);
+//		} else {
+			newPlayerObject = PhotonNetwork.Instantiate (car, spawnPoint.transform.position, spawnPoint.transform.rotation, 0);
+//		}
 		if (newPlayerObject != null) {
 			newPlayerObject.gameObject.name = PhotonNetwork.playerName;
 			m_AnimatorView = newPlayerObject.GetComponent<PhotonAnimatorView> ();

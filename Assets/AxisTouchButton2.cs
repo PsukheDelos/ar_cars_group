@@ -64,6 +64,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 			}
 			// update the axis and record that the button has been pressed this frame
 			if (PhotonNetwork.gameVersion == "Start") {
+
 				m_Axis.Update (Mathf.MoveTowards (m_Axis.GetValue, axisValue, responseSpeed * Time.deltaTime));
 			}
 		}
