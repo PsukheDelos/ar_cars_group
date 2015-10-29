@@ -92,7 +92,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 
 		void start()
 		{
-			startTime = T
+			startTime = Time.time;
 			currentTime = startTime;
 			countDownText.text = "";
 			timerText.text = "";
