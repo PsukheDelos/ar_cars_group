@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 namespace UnityStandardAssets.CrossPlatformInput
 {
 	public class ResetGame : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
+		public byte Version = 1;
 
 		// Use this for initialization
 		void Start () {
@@ -25,6 +26,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 		
 		public void OnPointerUp(PointerEventData data)
 		{
+//			PhotonNetwork.ConnectUsingSettings(Version + "."+Application.loadedLevel);
 			Application.LoadLevel (0); 
 		}
 	}

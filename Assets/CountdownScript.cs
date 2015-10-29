@@ -86,6 +86,7 @@ public class CountdownScript : MonoBehaviour {
 				scoreText.text = scoreText.text + "DRAW!";
 			}
 			GameObject.Find ("ResetCanvas").gameObject.GetComponent<Canvas> ().enabled = true;
+			PhotonNetwork.Disconnect ();
 		}
 	}
 	
