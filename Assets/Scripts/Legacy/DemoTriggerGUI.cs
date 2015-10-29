@@ -1,6 +1,12 @@
 ﻿using Photon;
 using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using System;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class DemoTriggerGUI : PunBehaviour
 {
@@ -215,22 +221,26 @@ public class DemoTriggerGUI : PunBehaviour
 		GameObject newPlayerObject;
 		PhotonNetwork.playerName = PhotonNetwork.playerList.Length.ToString ();
 
-		//		PhotonNetwork.playerName = "2"; //for testing player 2 spawn start location
+		List<string> carNames = new List<string> ();
+		carNames.Add ("CarV8");
+		carNames.Add ("CarSkull");
+		carNames.Add ("CarBus");
+		carNames.Add ("CarSpike");
+		carNames.Add ("CarTaxi");
+	
+		String car = "CarV8";
+		car = carNames.ToArray ().GetValue (UnityEngine.Random.Range (0, carNames.Count - 1)).ToString ();
+
 		GameObject spawnPoint = GameObject.Find ("Player" + PhotonNetwork.playerName + "SpawnPoint");
 		if (PhotonNetwork.playerName == "1") {
-			newPlayerObject = PhotonNetwork.Instantiate ("CarV8", spawnPoint.transform.position, spawnPoint.transform.rotation, 0);
+			newPlayerObject = PhotonNetwork.Instantiate (car, spawnPoint.transform.position, spawnPoint.transform.rotation, 0);
 		} else {
-			newPlayerObject = PhotonNetwork.Instantiate ("CarSkull", spawnPoint.transform.position, spawnPoint.transform.rotation, 0);
+			newPlayerObject = PhotonNetwork.Instantiate (car, spawnPoint.transform.position, spawnPoint.transform.rotation, 0);
 		}
-//		newPlayerObject = PhotonNetwork.Instantiate ("CarSkull", spawnPoint.transform.position, spawnPoint.transform.rotation, 0);
 		if (newPlayerObject != null) {
 			newPlayerObject.gameObject.name = PhotonNetwork.playerName;
 			m_AnimatorView = newPlayerObject.GetComponent<PhotonAnimatorView> ();
 		}
-
-//		if (PhotonNetwork.playerList.Length < 2) {
-//			Time.timeScale = 0;
-//		}
 
     }
 
