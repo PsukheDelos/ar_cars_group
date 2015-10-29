@@ -26,9 +26,9 @@ void OnCollisionEnter(Collision col){
 	void checkhit(){
 	if(hit == 20){
 		GameObject spawnPoint = GameObject.Find ("Player" + PhotonNetwork.playerName + "SpawnPoint");
+		PhotonNetwork.Instantiate(DeathAnimation.name, transform.position, transform.rotation, 0);
 		gameObject.transform.position = spawnPoint.transform.position;
 		gameObject.transform.rotation = spawnPoint.transform.rotation;
-		PhotonNetwork.Instantiate(DeathAnimation.name, transform.position, transform.rotation, 0);
 		hit = 0;
 		PhotonNetwork.player.AddScore(1);
 		}
