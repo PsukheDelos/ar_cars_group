@@ -14,10 +14,11 @@ void OnCollisionEnter(Collision col){
 		if (col.gameObject.name.Contains ("Bullet")) {
 			Debug.Log ("Bullet Hit");
 			hit += 1;
-		} else if (col.gameObject.tag == "Ram") {
-			Debug.Log ("Vehicle Hit");
-			hit += 5;
-		} 
+		}
+//		} else if (col.gameObject.tag == "Ram") {
+//			Debug.Log ("Vehicle Hit");
+//			hit += 5;
+//		} 
 		GameObject.Find(PhotonNetwork.playerName).GetPhotonView().RPC("checkhit", PhotonTargets.All);
 	}
 
@@ -29,8 +30,8 @@ void OnCollisionEnter(Collision col){
 			//		GameObject.Find(PhotonNetwork.player.name).transform(spawnPoint.transform);
 //		PhotonNetwork.Destroy(gameObject);
 		PhotonNetwork.Instantiate(DeathAnimation.name, transform.position, transform.rotation, 0);
-			hit = 0;
-			PhotonNetwork.player.AddScore(1);
+		hit = 0;
+		PhotonNetwork.player.AddScore(1);
 		}
   }
 }
