@@ -10,7 +10,6 @@ public class HitCount2 : MonoBehaviour{
 	int hit = 0;
 
 
-
 void OnCollisionEnter(Collision col){
 		if (col.gameObject.name.Contains ("Bullet")) {
 			Debug.Log ("Bullet Hit");
@@ -19,21 +18,19 @@ void OnCollisionEnter(Collision col){
 			Debug.Log ("Vehicle Hit");
 			hit += 5;
 		} 
-//		hit += 5; //for debugging
 		GameObject.Find(PhotonNetwork.playerName).GetPhotonView().RPC("checkhit", PhotonTargets.All);
-
-//		checkhit ();
 	}
 
 [PunRPC]
-void checkhit(){
+	void checkhit(){
 	if(hit == 20){
-		PhotonNetwork.Destroy(gameObject);
-//		Destroy(gameObject);
-//		PhotonNetwork.Instantiate (Car, transform.position, transform.rotation, 0);
-			// might need to do this over the network???
+		GameObject spawnPoint = GameObject.Find ("Player" + PhotonNetwork.playerName + "SpawnPoint");
+			gameObject.transform.position = spawnPoint.transform.position;
+			//		GameObject.Find(PhotonNetwork.player.name).transform(spawnPoint.transform);
+//		PhotonNetwork.Destroy(gameObject);
 		PhotonNetwork.Instantiate(DeathAnimation.name, transform.position, transform.rotation, 0);
-//		Instantiate(Car, transform.position, transform.rotation);
-	}
+			hit = 0;
+			PhotonNetwork.player.AddScore(1);
+		}
   }
 }
