@@ -26,7 +26,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 		
 		public void OnPointerUp(PointerEventData data)
 		{
-//			PhotonNetwork.ConnectUsingSettings(Version + "."+Application.loadedLevel);
+			PhotonNetwork.player.SetScore (0);
 			Application.LoadLevel (0); 
 		}
 	}
