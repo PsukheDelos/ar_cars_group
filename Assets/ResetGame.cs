@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System;
@@ -25,8 +25,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 		
 		public void OnPointerUp(PointerEventData data)
 		{
-			Application.Quit ();
-//			Application.LoadLevel (0);  
+			Application.LoadLevel (0); 
 		}
 	}
 }
