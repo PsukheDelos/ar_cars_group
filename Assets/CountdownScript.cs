@@ -17,8 +17,6 @@ public class CountdownScript : MonoBehaviour {
 	private float currentTime;
 
 	void Start () {
-//		roomText.text = "Room: " + PhotonNetwork.room.name;
-//		playerText.text = "Player " + PhotonNetwork.player.name;
 	}
 	
 	// Update is called once per frame
@@ -62,17 +60,14 @@ public class CountdownScript : MonoBehaviour {
 		if (elapsedTime > 3.0 && elapsedTime <= gameDuration) {
 			float timeRemaining = (float)gameDuration - elapsedTime;
 			countDownText.text = "";
-			timerText.text = "Time Left " + timeRemaining + "s";
-			//				Debug.Log (timerText.text);
+			timerText.text = "Time Left " + Mathf.Round(timeRemaining) + "s";
 		} else if (elapsedTime <= 3.0) {
 			string txt = "Game starting in\n" + (int)(4 - elapsedTime);
 			countDownText.text = txt;
 			timerText.text = "";
 		} else { // game ends
 			timerText.text = "";
-			// TODO: add in game logic to determine winner here
 			countDownText.text = "GAME OVER\n";
-//			PhotonNetwork.playerList[0].Getsc
 			scoreText.text = "Player 1: " + PhotonNetwork.playerList[0].GetScore() + "\n" +
 				"Player 2: " + PhotonNetwork.playerList[1].GetScore() + "\n";
 			if(PhotonNetwork.player.GetScore() < PhotonNetwork.otherPlayers[0].GetScore()){
@@ -85,9 +80,6 @@ public class CountdownScript : MonoBehaviour {
 				scoreText.text = scoreText.text + "DRAW!";
 			}
 			GameObject.Find ("ResetCanvas").gameObject.GetComponent<Canvas> ().enabled = true;
-
-//				"YOU  LOSE/WIN
-			// TODO: probably should add in logic to disable controls here
 		}
 	}
 	
