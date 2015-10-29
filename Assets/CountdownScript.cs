@@ -25,6 +25,8 @@ public class CountdownScript : MonoBehaviour {
 	}
 
 	public void FixedUpdate () {
+		roomText.text = "Room: " + PhotonNetwork.room.name;
+		playerText.text = "Player " + PhotonNetwork.player.name;
 		if (PhotonNetwork.playerList.Length > 1) {
 			if (first) {
 				start ();
@@ -34,8 +36,8 @@ public class CountdownScript : MonoBehaviour {
 			}				
 		} else {
 			// resets game
-			roomText.text = "Room: " + PhotonNetwork.room.name;
-			playerText.text = "Player " + PhotonNetwork.player.name;
+//			roomText.text = "Room: " + PhotonNetwork.room.name;
+//			playerText.text = "Player " + PhotonNetwork.player.name;
 			countDownText.text = "Waiting for\nplayer...";
 			timerText.text = "";
 		}
@@ -68,8 +70,8 @@ public class CountdownScript : MonoBehaviour {
 		} else { // game ends
 			timerText.text = "";
 			countDownText.text = "GAME OVER\n";
-			scoreText.text = "Player 1: " + PhotonNetwork.playerList[0].GetScore() + "\n" +
-				"Player 2: " + PhotonNetwork.playerList[1].GetScore() + "\n";
+			scoreText.text = "Player " + PhotonNetwork.player.name + ": " + PhotonNetwork.player.GetScore() + "\n" +
+				"Player " + PhotonNetwork.otherPlayers[0].name + ": " + PhotonNetwork.otherPlayers[0].GetScore() + "\n";
 			if(PhotonNetwork.player.GetScore() < PhotonNetwork.otherPlayers[0].GetScore()){
 				scoreText.text = scoreText.text + "You win!";
 			}
