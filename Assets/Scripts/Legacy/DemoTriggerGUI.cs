@@ -227,6 +227,11 @@ public class DemoTriggerGUI : PunBehaviour
 			newPlayerObject.gameObject.name = PhotonNetwork.playerName;
 			m_AnimatorView = newPlayerObject.GetComponent<PhotonAnimatorView> ();
 		}
+
+//		if (PhotonNetwork.playerList.Length < 2) {
+//			Time.timeScale = 0;
+//		}
+
     }
 
     #endregion
