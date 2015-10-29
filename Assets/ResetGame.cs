@@ -10,7 +10,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 
 		// Use this for initialization
 		void Start () {
-		
+			
 		}
 		
 		// Update is called once per frame
@@ -25,7 +25,8 @@ namespace UnityStandardAssets.CrossPlatformInput
 		
 		public void OnPointerUp(PointerEventData data)
 		{
-			Application.LoadLevel (0);  
+			Application.Quit ();
+//			Application.LoadLevel (0);  
 		}
 	}
 }

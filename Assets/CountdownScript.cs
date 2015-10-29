@@ -15,6 +15,7 @@ public class CountdownScript : MonoBehaviour {
 	private bool first = true;
 	private float startTime;
 	private float currentTime;
+	private bool gameOver = false;
 
 	void Start () {
 	}
@@ -60,6 +61,7 @@ public class CountdownScript : MonoBehaviour {
 		float elapsedTime = currentTime - startTime;
 		
 		if (elapsedTime > 3.0 && elapsedTime <= gameDuration) {
+			PhotonNetwork.gameVersion = "Start";
 			float timeRemaining = (float)gameDuration - elapsedTime;
 			countDownText.text = "";
 			timerText.text = "Time Left " + Mathf.Round(timeRemaining) + "s";
@@ -68,6 +70,8 @@ public class CountdownScript : MonoBehaviour {
 			countDownText.text = txt;
 			timerText.text = "";
 		} else { // game ends
+			gameOver = true;
+			PhotonNetwork.gameVersion = "GameOver";
 			timerText.text = "";
 			countDownText.text = "GAME OVER\n";
 			scoreText.text = "Player " + PhotonNetwork.player.name + ": " + PhotonNetwork.otherPlayers[0].GetScore() + "\n" +

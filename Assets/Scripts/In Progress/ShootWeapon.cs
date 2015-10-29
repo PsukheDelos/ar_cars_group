@@ -33,7 +33,9 @@ namespace UnityStandardAssets.CrossPlatformInput
 			cooldown += Time.deltaTime;
 			if (type == WeaponType.TOMMYGUN && cooldown > 0.1f && tommy_ammo > 0 && firing==true) {
 				cooldown = 0;
-				GameObject.Find(PhotonNetwork.playerName).GetPhotonView().RPC("fireMachineGun", PhotonTargets.All);
+				if(PhotonNetwork.gameVersion=="Start"){
+					GameObject.Find(PhotonNetwork.playerName).GetPhotonView().RPC("fireMachineGun", PhotonTargets.All);
+				}
 			}
 		}
 
