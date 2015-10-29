@@ -70,8 +70,8 @@ public class CountdownScript : MonoBehaviour {
 		} else { // game ends
 			timerText.text = "";
 			countDownText.text = "GAME OVER\n";
-			scoreText.text = "Player " + PhotonNetwork.player.name + ": " + PhotonNetwork.player.GetScore() + "\n" +
-				"Player " + PhotonNetwork.otherPlayers[0].name + ": " + PhotonNetwork.otherPlayers[0].GetScore() + "\n";
+			scoreText.text = "Player " + PhotonNetwork.player.name + ": " + PhotonNetwork.otherPlayers[0].GetScore() + "\n" +
+				"Player " + PhotonNetwork.otherPlayers[0].name + ": " + PhotonNetwork.player.GetScore() + "\n";
 			if(PhotonNetwork.player.GetScore() < PhotonNetwork.otherPlayers[0].GetScore()){
 				scoreText.text = scoreText.text + "You win!";
 			}
