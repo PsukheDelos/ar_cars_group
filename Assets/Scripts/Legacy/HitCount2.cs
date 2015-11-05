@@ -29,11 +29,17 @@ void OnCollisionEnter(Collision col){
 
 [PunRPC]
 	void checkhit(){
-		if(health == 0 || (transform.position.y < 10 && PhotonNetwork.player.GetTeam () == PunTeams.Team.none)){
+		if(health == 0 || transform.position.y < -30){
 			GameObject spawnPoint = GameObject.Find ("Player" + PhotonNetwork.playerName + "SpawnPoint");
-			PhotonNetwork.Instantiate(DeathAnimation.name, transform.position, transform.rotation, 0);
+
+			Vector3 p = transform.position;
+			Quaternion q = transform.rotation;
+
 			gameObject.transform.position = spawnPoint.transform.position;
 			gameObject.transform.rotation = spawnPoint.transform.rotation;
+			
+			PhotonNetwork.Instantiate(DeathAnimation.name, p, q, 0);
+
 			health = 100;
 //			healthSlider.value = health;
 			GameObject.Find ("HealthSlider" + PhotonNetwork.playerName).GetComponent<Slider> ().value = health;
@@ -41,5 +47,17 @@ void OnCollisionEnter(Collision col){
 				PhotonNetwork.player.AddScore(1);
 			}
 		}
+//		if (transform.position.y < -30) {
+//			GameObject spawnPoint = GameObject.Find ("Player" + PhotonNetwork.playerName + "SpawnPoint");
+//			PhotonNetwork.Instantiate(DeathAnimation.name, transform.position, transform.rotation, 0);
+//			gameObject.transform.position = spawnPoint.transform.position;
+//			gameObject.transform.rotation = spawnPoint.transform.rotation;
+//			health = 100;
+//			//			healthSlider.value = health;
+//			GameObject.Find ("HealthSlider" + PhotonNetwork.playerName).GetComponent<Slider> ().value = health;
+//			if(PhotonNetwork.gameVersion!="GameOver"){
+//				PhotonNetwork.player.AddScore(1);
+//			}
+//		}
   	}
 }

@@ -92,8 +92,6 @@ namespace UnityStandardAssets.CrossPlatformInput{
 					Debug.Log ("Join Room");
 				}
 
-
-
 				GameObject.Find ("JoinCanvas").gameObject.GetComponent<Canvas> ().enabled = false;
 				GameObject.Find ("ButtonCanvas").gameObject.GetComponent<Canvas> ().enabled = true;
 			}
